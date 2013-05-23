@@ -1,13 +1,13 @@
 #include "switch.h"
 		
 int main(int argc, char* argv[])
-{
+{    
     Switch(std::string(argv[1])).
-    Case(std::string("a"), []()
+    Case("a", []()
     {
         std::cout << "A" << std::endl; 
     }).
-    Case(std::string("b"), []()
+    Case("b", []()
     {
         std::cout << "B" << std::endl; 
     }).
