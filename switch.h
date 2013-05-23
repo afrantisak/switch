@@ -7,9 +7,10 @@ template<typename Key, typename Func = std::function<void()>>
 class Switcher
 {
     public:
-        Switcher()
+        Switcher(Key key)
             :   m_impl(),
-                m_default()
+                m_default(),
+                m_key(key)
         {
         }
         
@@ -25,9 +26,9 @@ class Switcher
             return *this;
         }
 
-        Switcher& operator()(Key key)
+        ~Switcher()
         {
-            auto iFunc = m_impl.find(key);
+            auto iFunc = m_impl.find(m_key);
             if (iFunc != m_impl.end())
             {
                 iFunc->second();
@@ -36,74 +37,42 @@ class Switcher
             {
                 m_default();
             }
-            return *this;
         }
 
     private:
         typedef std::map<Key, Func> Impl;
         Impl m_impl;
         Func m_default;
-};
-
-template<typename Key, typename Func = std::function<void()>>
-class AutoSwitcher
-{
-    public:
-        AutoSwitcher(Key key)
-            :   m_impl(),
-                m_key(key)
-        {
-        }
-        
-        ~AutoSwitcher()
-        {
-            m_impl(m_key);
-        }
-        
-        AutoSwitcher& Case(Key key, Func func)
-        {
-            m_impl.Case(key, func);
-            return *this;
-        }
-
-        AutoSwitcher& Default(Func func)
-        {
-            m_impl.Default(func);
-            return *this;
-        }
-
-    private:
-        Switcher<Key, Func> m_impl;
         Key m_key;
 };
 
 template<typename Key, typename Func = std::function<void()>>
-class AutoSwitcherWrap
+class SwitcherWrap
 {
     public:
-        AutoSwitcherWrap(Key key)
-            :   m_pImpl(new AutoSwitcher<Key, Func>(key))
+        SwitcherWrap(Key key)
+            :   m_pImpl(new Switcher<Key, Func>(key))
         {
         }
         
-        AutoSwitcherWrap& Case(Key key, Func func)
+        SwitcherWrap& Case(Key key, Func func)
         {
             m_pImpl->Case(key, func);
             return *this;
         }
 
-        AutoSwitcherWrap& Default(Func func)
+        SwitcherWrap& Default(Func func)
         {
             m_pImpl->Default(func);
             return *this;
         }
 
     private:
-        std::shared_ptr<AutoSwitcher<Key, Func>> m_pImpl;
+        std::shared_ptr<Switcher<Key, Func>> m_pImpl;
 };
 
 template<typename Key, typename Func = std::function<void()>>
-AutoSwitcherWrap<Key, Func> Switch(Key key)
+SwitcherWrap<Key, Func> Switch(Key key)
 {
-    return AutoSwitcherWrap<Key, Func>(key);
+    return SwitcherWrap<Key, Func>(key);
 }
