@@ -1,5 +1,3 @@
-Full background: [[https://github.com/afrantisak/switch/wiki]]
-
 How many times have you wished you could `switch` on a string?
 ```
 const char* pstr = "asdf";
@@ -19,7 +17,7 @@ default:
     break;
 }
 ```
-Now you can!
+Now you can! (with a little help from lambdas)
 ```
 Switch(pstr).
 Case("apple", []()
@@ -39,3 +37,5 @@ Default([]()
     std::cout << "UNKNOWN" << std::endl; 
 });
 ```
+Full background: https://github.com/afrantisak/switch/wiki
+
