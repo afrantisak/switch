@@ -2,6 +2,7 @@
 #include <functional>
 #include <memory>
 #include <map>
+#include <iostream>
 
 namespace Private
 {
@@ -19,14 +20,26 @@ namespace Private
             {
             }
             
-            void Case(Key key, Func func)
+            SwitchImpl& Case(Key key, Func func)
             {
                 m_impl.insert(std::make_pair(key, func));
+                return *this;
             }
 
-            void Default(Func func)
+            SwitchImpl& Default(Func func)
             {
                 m_default = func;
+                return *this;
+            }
+
+            SwitchImpl& operator()(Key key, Func func)
+            {
+                return Case(key, func);
+            }
+            
+            SwitchImpl& operator()(Func func)
+            {
+                return Default(func);
             }
 
             ~SwitchImpl()
@@ -49,47 +62,10 @@ namespace Private
             Key m_key;
     };
 
-    template<typename Key>
-    class SwitchWrap
-    {
-        public:
-            typedef typename SwitchImpl<Key>::Func Func;
-            
-            SwitchWrap(Key key)
-                :   m_pImpl(new SwitchImpl<Key>(key))
-            {
-            }
-            
-            SwitchWrap& Case(Key key, Func func)
-            {
-                m_pImpl->Case(key, func);
-                return *this;
-            }
-            
-            SwitchWrap& Default(Func func)
-            {
-                m_pImpl->Default(func);
-                return *this;
-            }
-
-            SwitchWrap& operator()(Key key, Func func)
-            {
-                return Case(key, func);
-            }
-            
-            SwitchWrap& operator()(Func func)
-            {
-                return Default(func);
-            }
-
-        private:
-            std::unique_ptr<SwitchImpl<Key>> m_pImpl;
-    };
-
 };// namespace Private
 
 template<typename Key>
-Private::SwitchWrap<Key> Switch(Key key)
+Private::SwitchImpl<Key> Switch(Key key)
 {
-    return Private::SwitchWrap<Key>(key);
+    return Private::SwitchImpl<Key>(key);
 }
