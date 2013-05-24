@@ -19,7 +19,8 @@ default:
 ```
 What are the alternatives?
 
-1. Use `if`s - This is everyone's first try.
+1. Use `if`s - This is everyone's first try:
+
 ```
 const char* pstr = "asdf";
 if (strcmp(pstr, "apple") == 0)
@@ -40,7 +41,9 @@ else
 }
 ```
 This is ugly, slow, and hard to maintain.
+
 1. Optimized `if`s.  If speed is an issue and you don't like all those `strcmp`s you probably tried this:
+
 ```
 if (pstr[0]) == 'a')
 {
@@ -62,5 +65,32 @@ else
     std::cout << "UNKNOWN" << std::endl;
 }
 ```
-This is a bit faster depending on what your input data looks like and how you can structure the `if`s.
+This can be a bit faster depending on what your input data looks like and how you structure the `if`s.
 However, its even uglier and positively a nightmare to maintain.  
+
+1. Use `std::string`.  This makes it much easier to read:
+
+```
+std::string str(pstr);
+if (str[0] == 'a')
+{
+    if (str == "apple")
+    {
+        std::cout << "APPLE" << std::endl;
+    }
+    else if (str == "aardvark")
+    {
+        std::cout << "AARDVARK" << std::endl;
+    }
+}
+else if (pstr[0] == 'b')
+{
+    std::cout << "BANANA" << std::endl;
+}
+else
+{
+    std::cout << "UNKNOWN" << std::endl;
+}
+```
+Still though, maintenance is a mess, especially when your `case`s change often.
+

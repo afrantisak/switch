@@ -37,13 +37,34 @@ int test()
 //        break;
 //    }
 
-    if (pstr[0]) == 'a')
+//    if (pstr[0]) == 'a')
+//    {
+//        if (strcmp(pstr, "apple") == 0)
+//        {
+//            std::cout << "APPLE" << std::endl;
+//        }
+//        else if (strcmp(pstr, "aardvark") == 0)
+//        {
+//            std::cout << "AARDVARK" << std::endl;
+//        }
+//    }
+//    else if (pstr[0] == 'b')
+//    {
+//        std::cout << "BANANA" << std::endl;
+//    }
+//    else
+//    {
+//        std::cout << "UNKNOWN" << std::endl;
+//    }
+
+    std::string str(pstr);
+    if (str[0] == 'a')
     {
-        if (strcmp(pstr, "apple") == 0)
+        if (str == "apple")
         {
             std::cout << "APPLE" << std::endl;
         }
-        else if (strcmp(pstr, "aardvark") == 0)
+        else if (str == "aardvark")
         {
             std::cout << "AARDVARK" << std::endl;
         }
@@ -56,5 +77,5 @@ int test()
     {
         std::cout << "UNKNOWN" << std::endl;
     }
-    
+        
 }
