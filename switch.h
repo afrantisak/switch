@@ -14,16 +14,14 @@ class Switcher
         {
         }
         
-        Switcher& Case(Key key, Func func)
+        void Case(Key key, Func func)
         {
             m_impl.insert(std::make_pair(key, func));
-            return *this;
         }
 
-        Switcher& Default(Func func)
+        void Default(Func func)
         {
             m_default = func;
-            return *this;
         }
 
         ~Switcher()
@@ -68,7 +66,7 @@ class SwitcherWrap
         }
 
     private:
-        std::shared_ptr<Switcher<Key, Func>> m_pImpl;
+        std::unique_ptr<Switcher<Key, Func>> m_pImpl;
 };
 
 template<typename Key, typename Func = std::function<void()>>
