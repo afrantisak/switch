@@ -1,7 +1,6 @@
-Have you ever wished you could `switch` on a string?  Now you can:
+Ever wished you could `switch` on a string?  Now you can:
 ```
-const char* pcsz = "pear";
-Switch(pcsz).
+Switch(std::string(psz)).
 Case("apple", []()
 {
     std::cout << "APPLE" << std::endl; 
@@ -19,6 +18,7 @@ Default([]()
     std::cout << "UNKNOWN" << std::endl; 
 });
 ```
+
 ###Pros
 * Implemented using a `std::map<>` so you get the benefits of its lookup.
 * Templatized key so you can switch on `int`s or anything `less`-able.  
