@@ -3,10 +3,12 @@
 #include <memory>
 #include <map>
 
-template<typename Key, typename Func = std::function<void()>>
+template<typename Key>
 class Switcher
 {
     public:
+        typedef std::function<void()> Func;
+        
         Switcher(Key key)
             :   m_impl(),
                 m_default(),
@@ -44,12 +46,14 @@ class Switcher
         Key m_key;
 };
 
-template<typename Key, typename Func = std::function<void()>>
+template<typename Key>
 class SwitcherWrap
 {
     public:
+        typedef typename Switcher<Key>::Func Func;
+        
         SwitcherWrap(Key key)
-            :   m_pImpl(new Switcher<Key, Func>(key))
+            :   m_pImpl(new Switcher<Key>(key))
         {
         }
         
@@ -66,11 +70,11 @@ class SwitcherWrap
         }
 
     private:
-        std::unique_ptr<Switcher<Key, Func>> m_pImpl;
+        std::unique_ptr<Switcher<Key>> m_pImpl;
 };
 
-template<typename Key, typename Func = std::function<void()>>
-SwitcherWrap<Key, Func> Switch(Key key)
+template<typename Key>
+SwitcherWrap<Key> Switch(Key key)
 {
-    return SwitcherWrap<Key, Func>(key);
+    return SwitcherWrap<Key>(key);
 }
