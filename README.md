@@ -37,5 +37,6 @@ Default([]()
     std::cout << "UNKNOWN" << std::endl; 
 });
 ```
+Not exactly the same.  You don't get duplicate checking or the ability to pass-through without a `break`, but I think thats actually a feature. 
 Full background: https://github.com/afrantisak/switch/wiki
 
