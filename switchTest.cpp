@@ -37,17 +37,24 @@ int test()
 //        break;
 //    }
 
-    if (strcmp(pstr, "asdf") == 0)
+    if (pstr[0]) == 'a')
     {
-        // do something
+        if (strcmp(pstr, "apple") == 0)
+        {
+            std::cout << "APPLE" << std::endl;
+        }
+        else if (strcmp(pstr, "aardvark") == 0)
+        {
+            std::cout << "AARDVARK" << std::endl;
+        }
     }
-    else if (strcmp(pstr, "qwer") == 0)
+    else if (pstr[0] == 'b')
     {
-        // do something else
+        std::cout << "BANANA" << std::endl;
     }
     else
     {
-        // something completely different
+        std::cout << "UNKNOWN" << std::endl;
     }
     
 }
