@@ -27,23 +27,5 @@ int main(int argc, const char* argv[])
         youTyped("something I don't understand");
     });    
 
-    Switch(std::string(argv[1]))
-    ("apple", []()
-    {
-        youTyped("apple");
-    })
-    ("aardvark", []()
-    {
-        youTyped("aardvark");
-    })
-    ("banana", []()
-    {
-        youTyped("banana");
-    })
-    ([]()
-    {
-        youTyped("something I don't understand");
-    });    
-
     return 0;
 }

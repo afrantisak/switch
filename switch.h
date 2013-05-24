@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include <memory>
-#include <map>
+#include <unordered_map>
 #include <iostream>
 
 namespace Private
@@ -32,16 +32,6 @@ namespace Private
                 return *this;
             }
 
-            SwitchImpl& operator()(Key key, Func func)
-            {
-                return Case(key, func);
-            }
-            
-            SwitchImpl& operator()(Func func)
-            {
-                return Default(func);
-            }
-
             ~SwitchImpl()
             {
                 auto iFunc = m_impl.find(m_key);
@@ -56,7 +46,7 @@ namespace Private
             }
 
         private:
-            typedef std::map<Key, Func> Impl;
+            typedef std::unordered_map<Key, Func> Impl;
             Impl m_impl;
             Func m_default;
             Key m_key;
