@@ -1,43 +1,48 @@
 #include "switch.h"
 #include <iostream>
 #include <string>
-		
+
+void youTyped(std::string str)
+{
+    std::cout << "You typed " << str << "." << std::endl;
+}
+
 int main(int argc, const char* argv[])
-{    
+{
     Switch(std::string(argv[1])).
-    Case("apple", []()
+    Case("apple",  []()
     {
-        std::cout << "APPLE" << std::endl; 
+        youTyped("apple");
     }).
     Case("aardvark", []()
     {
-        std::cout << "AARDVARK" << std::endl; 
+        youTyped("aardvark");
     }).
     Case("banana", []()
     {
-        std::cout << "BANANA" << std::endl; 
+        youTyped("banana");
     }).
     Default([]()
     {
-        std::cout << "UNKNOWN" << std::endl; 
+        youTyped("something I don't understand");
     });    
 
     Switch(std::string(argv[1]))
     ("apple", []()
     {
-        std::cout << "APPLE" << std::endl; 
+        youTyped("apple");
     })
     ("aardvark", []()
     {
-        std::cout << "AARDVARK" << std::endl; 
+        youTyped("aardvark");
     })
     ("banana", []()
     {
-        std::cout << "BANANA" << std::endl; 
+        youTyped("banana");
     })
     ([]()
     {
-        std::cout << "UNKNOWN" << std::endl; 
+        youTyped("something I don't understand");
     });    
 
     return 0;
