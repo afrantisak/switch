@@ -1,8 +1,9 @@
 #include "switch.h"
+#include <iostream>
 		
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {    
-    Switch(std::string(argv[1])).
+    Switch(argv[1]).
     Case("a", []()
     {
         std::cout << "A" << std::endl; 

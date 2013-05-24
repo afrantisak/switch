@@ -6,7 +6,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 project(switch)
 
-# mc-recv-raw
 add_executable(switchTest switchTest.cpp )
 TARGET_LINK_LIBRARIES(switchTest)
 
@@ -19,10 +18,3 @@ macro(add_test_diff name file command)
 endmacro(add_test_diff)
 
 add_test(help bin/switchTest)
-
-
-#cmake_minimum_required(VERSION 2.8)
-#find_package(Boost COMPONENTS iostreams REQUIRED)
-# 
-#add_executable(memory-map main.cpp)
-#target_link_libraries(memory-map ${Boost_LIBRARIES})
