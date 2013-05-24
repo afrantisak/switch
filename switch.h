@@ -34,16 +34,10 @@ namespace Private
                 auto iFunc = m_impl.find(m_key);
                 if (iFunc != m_impl.end())
                 {
-                    std::cout << "found: " << m_key << std::endl;
                     iFunc->second();
                 }
                 else
                 {
-                    std::cout << "coult not find: " << m_key << std::endl;
-                for (auto pair: m_impl)
-                {
-                    std::cout << pair.first << std::endl;
-                }
                     m_default();
                 }
             }

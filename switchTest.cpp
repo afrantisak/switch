@@ -1,22 +1,25 @@
-#include <iostream>
 #include "switch.h"
-#include <string.h>
+#include <iostream>
+#include <string>
 		
 int main(int argc, const char* argv[])
 {    
-    Switch(std::string(argv[1]))
-    ("a", []()
+    Switch(std::string(argv[1])).
+    Case("apple", []()
     {
-        std::cout << "A" << std::endl; 
-    })
-    ("b", []()
+        std::cout << "APPLE" << std::endl; 
+    }).
+    Case("aardvark", []()
     {
-        std::cout << "B" << std::endl; 
-    })
-    ([]()
+        std::cout << "AARDVARK" << std::endl; 
+    }).
+    Case("banana", []()
     {
-        std::cout << "default" << std::endl; 
-    });
-    
+        std::cout << "BANANA" << std::endl; 
+    }).
+    Default([]()
+    {
+        std::cout << "UNKNOWN" << std::endl; 
+    });    
     return 0;
 }
