@@ -17,7 +17,7 @@ default:
     break;
 }
 ```
-Now you can! (with a little help from lambdas)
+Now you can!
 ```
 Switch(pstr).
 Case("apple", []()
